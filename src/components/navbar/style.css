@@ -1,0 +1,33 @@
+.navbar {
+    background-color: #f7f7f7;
+    padding: 10px 0;
+    position: fixed; /* Fixed position to keep it at the top */
+    top: 0; /* Position it at the top */
+    width: 100%; /* Make it full width */
+    height: 25px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.navbar-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-item {
+    margin: 5px 10px;
+}
+
+.navbar-link {
+    text-decoration: none;
+    color: rgb(3, 3, 3);
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navbar-link:hover {
+    color: #2980b9;
+}

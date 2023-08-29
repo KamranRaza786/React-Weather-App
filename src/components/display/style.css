@@ -1,0 +1,26 @@
+.room {
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+  }
+
+  .text {
+    margin-top: 260px;
+  }
+  
+  .light {
+    background-color: #f7f7f7;
+    color: #333;
+  }
+  
+  .dark {
+    background-color: #333;
+    color: #f7f7f7;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 260px;
+  }

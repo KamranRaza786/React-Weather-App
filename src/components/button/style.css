@@ -1,0 +1,20 @@
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+  }
+  
+  .button:hover {
+    background-color: #2980b9;
+  }
+  
+  .button:focus {
+    outline: none;
+  }
