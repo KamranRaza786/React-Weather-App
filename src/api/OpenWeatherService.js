@@ -1,46 +1,43 @@
-const GEO_API_URL = 'https://wft-geo-db.p.rapidapi.com/v1/geo';
-
+// OpenWeatherService.js
 const WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5';
-const WEATHER_API_KEY = '53134ec34f2670fa380d439f0f7813b4';
+const WEATHER_API_KEY = '53134ec34f2670fa380d439f0f7813b4'; // Replace with your actual API key
 
-const GEO_API_OPTIONS = {
-  method: 'GET',
-  headers: {
-    'X-RapidAPI-Key': '353a974ae7msh7ede14095bb7392p14cd1ejsnb21da3c72da6',
-    'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com',
-  },
-};
-
-export async function fetchWeatherData(lat, lon) {
-  try {
-    let [weatherPromise, forcastPromise] = await Promise.all([
-      fetch(
-        `${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
-      ),
-      fetch(
-        `${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
-      ),
-    ]);
-
-    const weatherResponse = await weatherPromise.json();
-    const forcastResponse = await forcastPromise.json();
-    return [weatherResponse, forcastResponse];
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-export async function fetchCities(input) {
+export async function fetchWeatherDataByCoordinates(lat, lon) {
   try {
     const response = await fetch(
-      `${GEO_API_URL}/cities?minPopulation=10000&namePrefix=${input}`,
-      GEO_API_OPTIONS
+      `${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
     );
+
+    if (!response.ok) {
+      throw new Error('Request failed');
+    }
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error);
-    return;
+    console.log('Error:', error.message);
+    throw error;
   }
+}
+
+export async function fetchWeatherDataByCityAndCountry(city, country) {
+  try {
+    const response = await fetch(
+      `${WEATHER_API_URL}/weather?q=${city},${country}&appid=${WEATHER_API_KEY}&units=metric`
+    );
+
+    if (!response.ok) {
+      throw new Error('Request failed');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log('Error:', error.message);
+    throw error;
+  }
+}
+
+export async function fetchCities(input) {
+  // Implementation here
 }
