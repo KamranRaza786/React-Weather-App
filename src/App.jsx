@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Box, Container, Grid, Link, SvgIcon, Typography } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Box, Container, Grid, Link, SvgIcon, Typography, } from '@mui/material';
 import Search from './components/Search/Search';
 import WeeklyForecast from './components/WeeklyForecast/WeeklyForecast';
 import TodayWeather from './components/TodayWeather/TodayWeather';
@@ -23,6 +23,39 @@ function App() {
   const [weekForecast, setWeekForecast] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [longitude, latitude] =useState (false);
+  const [enteredData] = useState (false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch weather data here
+        setIsLoading(true);
+
+        const currentDate = transformDateFormat();
+        const date = new Date();
+        let dt_now = Math.floor(date.getTime() / 1000);
+
+        const [todayWeatherResponse, weekForecastResponse] = await fetchWeatherData(latitude, longitude);
+
+        const all_today_forecasts_list = getTodayForecastWeather(weekForecastResponse, currentDate, dt_now);
+        const all_week_forecasts_list = getWeekForecastWeather(weekForecastResponse, ALL_DESCRIPTIONS);
+
+        setTodayForecast([...all_today_forecasts_list]);
+        setTodayWeather({ city: enteredData.label, ...todayWeatherResponse });
+        setWeekForecast({
+          city: enteredData.label,
+          list: all_week_forecasts_list,
+        });
+      } catch (error) {
+        setError(true);
+      }
+
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, []);
 
   const searchChangeHandler = async (enteredData) => {
     const [latitude, longitude] = enteredData.value.split(' ');
@@ -59,6 +92,7 @@ function App() {
 
     setIsLoading(false);
   };
+
 
   let appContent = (
     <Box
@@ -192,7 +226,7 @@ function App() {
 
             <UTCDatetime />
             <Link
-              href="https://github.com/Amin-Awinti"
+              href="https://github.com/KamranRaza786/"
               target="_blank"
               underline="none"
               sx={{ display: 'flex' }}
