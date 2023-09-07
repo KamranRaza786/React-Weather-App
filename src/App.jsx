@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
 
 import WeatherCard from "./components/WeatherCard";
@@ -47,7 +47,7 @@ function App() {
 
       const response = await axios.get(
         `http://api.weatherapi.com/v1/current.json?key=38a9ab72fa4044218e075627230807&q=${inputRef.current.value}&aqi=no`
-        `https://api.weatherapi.com/v1/forecast.json?key=38a9ab72fa4044218e075627230807&q=${inputRef.current.value}&days=7&aqi=no&alerts=no`
+        // `https://api.weatherapi.com/v1/forecast.json?key=38a9ab72fa4044218e075627230807&q=${inputRef.current.value}&days=7&aqi=no&alerts=no`
       );
       console.log("response: ", response.data);
 
@@ -77,7 +77,7 @@ function App() {
     <><div class="navbar">
       <div class="navbar-logo">
         <img src="./logo192.png" alt="logo" hieght="6%" width="6%"></img>
-        <a href="#">Weather App</a>
+        <a href="https://www.google.com/">Weather App</a>
       </div>
       <div class="navbar-menu">
         <ul>
@@ -91,7 +91,7 @@ function App() {
         </ul>
       </div>
     </div><div>
-        <h1 align="center">Weather App</h1>
+        <h1 align="center">App Currently Showing {cityName} Weather</h1>
 
         <form onSubmit={getWeather}>
           <label htmlFor="cityName">City: </label>
@@ -103,9 +103,7 @@ function App() {
             required
             onChange={changeHandler}
             ref={inputRef} />
-          <br />
-
-          <button type="submit" class="submit-button"><i class="fas fa-search"></i>Get Weather</button>
+            <button type="submit" class="submit-button"><i class="fas fa-search"></i>Get Weather</button>
         </form>
 
         <br />
